@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+//Não expõe o modelo, filtra campos necessários criando uma View...
 public class ClientDTO {
     private Long id;
     private String name;

@@ -15,18 +15,18 @@ import java.util.stream.Collectors;
 public class ClientAssembler {
     private ModelMapper modelMapper;
 
-    //qdo precisar de uma EntityDTO
+    //Qdo precisar de uma EntityDTO
     public ClientDTO toModel(Client client){
         return modelMapper.map(client, ClientDTO.class);
     }
 
 
-    //qdo precisar de uma List<EntityDTO> normal...
+    //Qdo precisar de uma List<EntityDTO> normal...
     public List<ClientDTO> toCollectionModel(List<Client> clients){
         return clients.stream().map(this::toModel).collect(Collectors.toList());
     }
 
-    //qdo precisar de um Page<EntityDTO> paginada...
+    //Qdo precisar de um Page<EntityDTO> paginada...
     public Page<ClientDTO> toColletionModelPage(Page<Client> clients) {
         return clients.map(this::toModel);
     }

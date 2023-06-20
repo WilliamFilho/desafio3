@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.Instant;
 
 
-//já tratar os principais errors da aplicação...
+//Já tratar os principais errors da aplicação...
+//Intercepta as exceções e as personaliza...
 @ControllerAdvice
 public class ControllerExceptionHandler {
-    @ExceptionHandler(com.wnet.desafio3.service.exceptions.ResourceNotFoundException.class)
+    //Recurso não encontrado...
+    @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<CustomError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
         CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 
+    //Entidade não encontrada...
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<CustomError> resourceNotFound(EntityNotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -33,6 +36,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
+    //Erros de dados (ex.: violação de integridade referencial)
     @ExceptionHandler(DatabaseException.class)
     public ResponseEntity<CustomError> dataBase(DatabaseException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -40,6 +44,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
+    //Interceptar e trata as validações (campos...)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<CustomError> methodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
