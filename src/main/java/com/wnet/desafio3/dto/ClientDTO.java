@@ -19,7 +19,7 @@ public class ClientDTO {
     @NotBlank(message = "Entre com um nome válido!")
     private String name;
 
-    @CPF(message = "Entre com CPF válido!")
+    //@CPF(message = "Entre com CPF válido!")
     private String cpf;
 
     @Positive(message = "Somente número positivo!")
