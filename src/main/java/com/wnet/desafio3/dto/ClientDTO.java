@@ -14,6 +14,7 @@ import java.time.LocalDate;
 //Não expõe o modelo, filtra campos necessários criando uma View...
 public class ClientDTO {
     private Long id;
+
     @NotEmpty(message = "Campo não pode ser vazio!")
     @NotBlank(message = "Entre com um nome válido!")
     private String name;
