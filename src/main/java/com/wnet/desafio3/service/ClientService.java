@@ -42,16 +42,12 @@ public class ClientService {
 
     @Transactional
     public ClientDTO uptade(Long id, ClientDTO dto) { //já envio convertido (DTO) / pensando em refatorar este código...
-        Client client;
-        Optional<Client> c = repository.findById(id);
-        if (c.isPresent()) {
+        return repository.findById(id).map(client -> {
             client = assembler.toEntity(dto);
             client.setId(id);
             repository.save(client);
-        }else {
-            throw new EntityNotFoundException("Cliente Inexistente!");
-        }
-        return assembler.toModel(client);
+            return assembler.toModel(client);
+        }).orElseThrow(()-> new ResourceNotFoundException("Cliente Inexistente!"));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
