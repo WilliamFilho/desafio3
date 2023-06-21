@@ -2,6 +2,7 @@ package com.wnet.desafio3.service;
 
 import com.wnet.desafio3.assembler.ClientAssembler;
 import com.wnet.desafio3.dto.ClientDTO;
+import com.wnet.desafio3.entity.Client;
 import com.wnet.desafio3.repository.ClientRepository;
 import com.wnet.desafio3.service.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
@@ -26,5 +27,12 @@ public class ClientService {
     @Transactional(readOnly = true)
     public Page<ClientDTO> findAll(Pageable pageable) {
         return assembler.toColletionModelPage(repository.findAll(pageable));
+    }
+
+    @Transactional
+    public ClientDTO insert(ClientDTO dto) { //já envio convertido (DTO)
+        Client newClient = assembler.toEntity(dto);
+        repository.save(newClient);
+        return assembler.toModel(newClient);
     }
 }
