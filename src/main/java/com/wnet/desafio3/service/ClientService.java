@@ -41,7 +41,7 @@ public class ClientService {
     }
 
     @Transactional
-    public ClientDTO uptade(Long id, ClientDTO dto) { //já envio convertido (DTO) / pensando em refatorar este código...
+    public ClientDTO uptade(Long id, ClientDTO dto) { //já envio convertido (DTO) /Refatorado...
         return repository.findById(id).map(client -> {
             client = assembler.toEntity(dto);
             client.setId(id);
