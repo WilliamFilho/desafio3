@@ -43,8 +43,8 @@ public class ClientService {
     @Transactional
     public ClientDTO uptade(Long id, ClientDTO dto) { //já envio convertido (DTO) / pensando em refatorar este código...
         Client client;
-        Optional<Client> p = repository.findById(id);
-        if (p.isPresent()) {
+        Optional<Client> c = repository.findById(id);
+        if (c.isPresent()) {
             client = assembler.toEntity(dto);
             client.setId(id);
             repository.save(client);
