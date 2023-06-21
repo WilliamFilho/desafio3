@@ -25,7 +25,7 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
-        return repository.findById(id).map(product -> assembler.toModel(product)).orElseThrow(()-> new ResourceNotFoundException("Cliente Inexistente!"));
+        return repository.findById(id).map(client -> assembler.toModel(client)).orElseThrow(()-> new ResourceNotFoundException("Cliente Inexistente!"));
     }
 
     @Transactional(readOnly = true)
